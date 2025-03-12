@@ -1,12 +1,14 @@
 import Header from "../components/Header";
 
 import React from 'react'
+import Navbar from "../components/Navigation/Navbar";
 
 const About = () => {
   return (
     <div>
-      <Header />
-      <h2> About Page </h2>
+        <Navbar />
+        <Header />
+        <h2> About Page </h2>
     </div>
   )
 }

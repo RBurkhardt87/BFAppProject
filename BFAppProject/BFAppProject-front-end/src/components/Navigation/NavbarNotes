@@ -1,0 +1,16 @@
+Since the project uses react-router-dom for page navigation, in order to update the navbar to correctly display which URL page the user is viewing -- useLocation() must be used along with a conditional that tracks the URL pathname.
+
+Why?
+
+With React Router, we're building a Single Page Application (SPA). The major advantage of an SPA is that we don’t reload the entire page every time a user navigates to a different route. Instead, React dynamically updates the content based on the route, which makes the app feel fast and responsive. However, this also means that React doesn’t automatically know when the URL changes in the browser, because the page doesn’t fully reload. It’s just React re-rendering components.
+
+In a traditional web app, if you click on a link, the entire page reloads, and the URL in the browser updates. React, however, only updates the UI components based on the state of the app. The issue is, since React is running within its own system and doesn’t get full-page reloads, the useState hook alone can’t track changes to the URL. React doesn’t automatically connect the current route (or URL) to the app’s state unless we tell it to.
+
+That’s where useLocation() comes in. It’s a React Router hook that lets us tap into the current location of the browser—specifically the pathname (which represents the part of the URL after the domain, like /home or /about). Whenever the URL changes, useLocation() will give us the new location, and React will re-render the component using it.
+
+Now that we have access to the pathname via useLocation(), we can use it to figure out which tab should be selected. For example, if the user is on the /home page, we can set the “Home” tab to be active. If they navigate to /about, the “About” tab should be active. This is where we use a conditional that checks the pathname and determines which tab value to set.
+
+This happens seamlessly because every time the URL changes, the component will re-render due to the updated location from useLocation(). When it re-renders, our conditional logic runs again to figure out the active tab, ensuring that the navbar always stays in sync with the current route.
+
+In short, because React Router doesn’t update UI elements like tabs on its own, we need to tell React which tab to highlight based on the current URL. And we do that by tracking the URL with useLocation() and updating the active tab accordingly.
+

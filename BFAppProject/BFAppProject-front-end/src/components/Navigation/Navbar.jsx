@@ -1,30 +1,82 @@
 import React from 'react'
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
-import Box from '@mui/material/Box';
+import { Tabs, Tab, Box, Link } from '@mui/material';
+import { useLocation } from 'react-router-dom';
+
 
 const Navbar = () => {
 
-    const [value, setValue] = React.useState('one');
+   
 
-    const handleChange = (event, newValue) => {
-      setValue(newValue);
-    };
+    const location = useLocation(); 
+    const path = location.pathname; 
+
+    function getTab() {
+        if (path === "/home") {
+            return "one";
+        }
+        else if (path === "/about") {
+            return "two"
+        }
+        else if (path === "/contact") {
+            return "three";
+        }
+        else if (path === "/login") {
+            return "four";
+        }
+        else if (path === "/register") {
+            return "five";
+        }
+        
+    }
+    
+
+
 
 
   return (
     <div className='navbar'>
         <Box sx={{ width: '100%' }}>
             <Tabs
-                value={value}
-                onChange={handleChange}
+                value={getTab()}
                 textColor="secondary"
                 indicatorColor="secondary"
-                aria-label="secondary tabs example"
+                
+                sx={{
+                    width: '100%',
+                    display: 'flex',
+                    justifyContent: 'space-evenly', 
+                  }}
             >
-                <Tab value="one" label="Item One" />
-                <Tab value="two" label="Item Two" />
-                <Tab value="three" label="Item Three" />
+                <Tab                         
+                     value="one" 
+                     label="Home" 
+                     component={Link} 
+                     href="/home"  
+                />
+                <Tab 
+                    value="two" 
+                    label="About" 
+                    component={Link}
+                    href="/about"
+                />
+                <Tab 
+                    value="three" 
+                    label="Contact" 
+                    component={Link}
+                    href="/contact"
+                />
+                <Tab 
+                    value="four" 
+                    label="Login" 
+                    component={Link}
+                    href="/login"
+                />
+                  <Tab 
+                    value="five" 
+                    label="Register" 
+                    component={Link}
+                    href="/register"
+                />
             </Tabs>
         </Box>
       

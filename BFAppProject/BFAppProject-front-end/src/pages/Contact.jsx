@@ -1,12 +1,14 @@
 import Header from "../components/Header";
 
 import React from 'react'
+import Navbar from "../components/Navigation/Navbar";
 
 const Contact = () => {
   return (
     <div>
-      <Header />
-      <h2> Contact Page </h2>
+        <Navbar />
+        <Header />
+        <h2> Contact Page </h2>
     </div>
   )
 }
