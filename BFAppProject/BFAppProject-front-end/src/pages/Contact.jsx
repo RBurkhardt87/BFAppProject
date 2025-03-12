@@ -6,9 +6,7 @@ import Navbar from "../components/Navigation/Navbar";
 const Contact = () => {
   return (
     <div>
-        <Navbar />
-        <Header />
-        <h2> Contact Page </h2>
+      <h3> This is where info for Contact Page will go... </h3>
     </div>
   )
 }

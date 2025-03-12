@@ -5,7 +5,6 @@ import Header from '../components/Header'
 const NoPage = () => {
   return (
     <div>
-      <Header />
       <h2>404 Error: Page Not Found</h2>
     </div>
   )

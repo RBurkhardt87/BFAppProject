@@ -5,10 +5,8 @@ import Navbar from "../components/Navigation/Navbar";
 
 const About = () => {
   return (
-    <div>
-        <Navbar />
-        <Header />
-        <h2> About Page </h2>
+    <div>        
+        <h3> This is where info for About Page will go... </h3>
     </div>
   )
 }

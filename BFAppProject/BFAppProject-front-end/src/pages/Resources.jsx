@@ -2,13 +2,12 @@ import React from 'react'
 import Navbar from '../components/Navigation/Navbar'
 import Header from '../components/Header'
 
-const Login = () => {
+const Resources = () => {
   return (
     <div>
-      <h3> This is where info for Login Page will go... </h3>
-      <h4> The Login Form will be here</h4>
+      <h3> This is where info for Resources Page will go... </h3>
     </div>
   )
 }
 
-export default Login
+export default Resources

@@ -5,10 +5,8 @@ import Header from '../components/Header'
 const Register = () => {
   return (
     <div>
-        <Navbar />
-        <Header />
-        <h2>This is the Register Page</h2>
-      
+      <h3> This is where info for About Page will go... </h3>
+      <h4> This is where the registration form will be placed</h4>
     </div>
   )
 }
