@@ -1,0 +1,25 @@
+
+
+header {
+    background-color: rgba(255, 68, 0, 0.447);
+    padding: 8px;
+    text-align: center;
+    border-radius: "8px";
+    border: 2px solid orangered;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 30px;
+}
+
+.page-header {
+    text-align: center;
+    color: teal;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.form-header {
+    text-align: center;
+    color: orangered;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px;
+}

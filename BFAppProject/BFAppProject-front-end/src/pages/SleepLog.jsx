@@ -1,6 +1,5 @@
 import React from 'react'
-import Navbar from '../components/Navigation/Navbar'
-import Header from '../components/Header'
+
 
 const SleepLog = () => {
   return (

@@ -1,0 +1,39 @@
+.formContainer {
+    padding: 20px;
+    background-color: rgba(0, 128, 128, 0.622);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    max-width: 600px; 
+    display: flex;        
+    flex-direction: column; 
+    justify-content: space-between; 
+    height: 100%;         
+}
+
+.formCard {
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.874);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+
+.submitButton {
+    width: 40%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    margin-top: 20px !important;
+    background-color: teal !important;  
+    border: none;
+    border-radius: 4px;         
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submitButton:hover {
+    background-color: rgba(255, 68, 0, 0.447) !important;  
+}

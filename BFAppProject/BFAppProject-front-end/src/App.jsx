@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import './styling/Header.css';
 
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -35,8 +36,8 @@ function MainLayout() {
   const currentPage = pageTitles[location.pathname] || "Page";
 
   return (
-    <div className="main">
-      <header className="page-header">
+    <div>
+      <header>
         <h1>Breastfeeding Application</h1>
       </header>
 

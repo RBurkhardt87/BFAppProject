@@ -1,8 +1,7 @@
 import React from 'react'
 import { Tabs, Tab, Box, Link } from '@mui/material';
 import { useLocation } from 'react-router-dom';
-import '../../styling/Navbar.module.css';
-import Header from '../Header';
+
 
 
 const Navbar = () => {
@@ -44,11 +43,18 @@ const Navbar = () => {
   return (
     
         <div className="nav-bar">
-            <Box sx={{ width: '100%' }}>
+            <Box sx={{
+                        display: "flex",
+                        justifyContent: "center", 
+                        backgroundColor: "rgba(40, 35, 35, 0.56)", 
+                        padding: "5px 0", 
+                        boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",                                                
+                    }}>
                 <Tabs
                     value={getTab()}
-                    textColor="secondary"
-                    indicatorColor="secondary"
+                    textColor='inherit'
+                    TabIndicatorProps={{ style: { backgroundColor: "orangered" } }} 
+                    centered
                     
                     sx={{
                         width: '100%',
@@ -60,7 +66,7 @@ const Navbar = () => {
                         value="one" 
                         label="Home" 
                         component={Link} 
-                        href="/home"  
+                        href="/home" 
                     />
                     <Tab 
                         value="two" 

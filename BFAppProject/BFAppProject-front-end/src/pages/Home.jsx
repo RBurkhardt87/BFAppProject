@@ -1,6 +1,3 @@
-import Header from "../components/Header";
-import Navbar from "../components/Navigation/Navbar";
-
 import React from 'react'
 
 const Home = () => {
