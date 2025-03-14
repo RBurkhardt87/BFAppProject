@@ -19,17 +19,17 @@ const SleepLogForm = () => {
     swaddled: Yup.boolean(),
     swaddleType: Yup.string().when("swaddled", {
       is: true,
-      then: Yup.string().required("Required when swaddled is checked"),
+      then: Yup.string(),
     }),
     crying: Yup.boolean(),
     cryingNotes: Yup.string().when("crying", {
         is: true,
-        then: Yup.string().required("Required when crying is checked"),
+        then: Yup.string(),
     }),
     sleepAssociations: Yup.boolean(),
     associationType: Yup.string().when("sleepAssociations", {
         is: true,
-        then: Yup.string().required("Required when sleep associations is checked")
+        then: Yup.string(),
     })
 
   });
