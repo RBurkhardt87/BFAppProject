@@ -1,0 +1,51 @@
+I decided to use Formik and Yup together. I have never used either, but it seems that Formik can make forms much easier since I don't need to track the useState myself...
+
+From my understanding, the Yup schema is an object that list each field as a key/value pair. The key is the field label name and they value is the Yup validation that is applied to that field. 
+
+Instead of setting the values of the field with an initial value and tracking it with the useState variable, Formik automatically manages the form state when there are changes in the initial values that are set for it. 
+
+Although I am not setting useState variables for each field, I do have to set an initial state using Formik in order for it to track the state of each. And then, Yup is what validates the fields
+
+
+
+*** STEPS FOR SETTING UP FORMIK: "npm install formik yup" ***
+
+1. Declare a Yup schema that outlines all the fields that will be included inside the form. For any field that is required you can add it, along with an error message. This schema is going to create validation to each field. (Inside the component, but before the return)  
+
+
+2. Declare an object that is going to set the initial values of each field. NOTE: When a user inputs for a field, the new value updates the initial value of the key/value pair within the object. (inside the return)
+
+3. Set the validationSchema to the outlined Yup schema initialized. This is how validation is implemented in the form. EX: validationSchema={SleepLogSchema}
+
+4. Once the user fills out the form they they click "Submit" Formik then gathers all the current values of the form fields into an object (Formik automatically updates the initial values of each field to what the user inputs). This object is passed as the userValues parameter in the onSubmit function. EX: onSubmit={(userValues) => console.log(userValues)} NOTE: remove the console.log once I know that the object is being created as desired
+
+5. When ready, add POST method inside the onSubmit function that will send the newly create object to the backend for storage. 
+
+6. After the onSubmit function is set, we are ready to create the form. In order to use Formik props in the form, we must wrap the <form> inside the destructuring of rendered props. EX. {({ values, handleChange, handleBlur, handleSubmit, errors, touched, resetForm, setValues }) => ( <form> )}. This will give use access to all the props we may want to use from Formik. These are just some available. Check below for an explanation of each.
+
+7. We are ready to create the <form> element and place all our fields inside with submit button. 
+
+*** NOTE: Wrap everything inside a <Formik> element so Formik knows to manage it ***
+
+
+
+
+*** BREAKDOWN OF THE FORMIK PROPS BEING RENDERED *** 
+
+values: Contains the current values of the form fields. NOTE: "value.<fieldName>"
+handleChange: A function that updates the form values as the user types or changes input.
+handleBlur:	A function that tracks when a field loses focus (blur event). 
+handleSubmit: A function that handles the form submission process.
+errors:	Contains the validation error messages for each field, populated by validation logic (Yup schema).
+touched: Tracks which fields the user has interacted with.
+resetForm: A function that resets the form back to its initial values.
+setValues: A function that allows you to programmatically set the values of the form fields.
+
+NOTE: handleBlur and touched should be used together. They prevent error messages from popping up before user has input anything in a field, or even submitted the form. It just makes it more user friendly and less frustrating. 
+
+
+
+
+*** ADDITIONAL NOTES TO KEEP IN MIND ***
+
+1. I had issues with one of the checkboxes (crying) unchecking once checked. It seems that using setFieldValue should be used with checkboxes. onChange works fine for input fields, but checkboxes toggle boolean values and it can sometimes cause issues with the onChange prop, however, setFieldValue ensures the boolean value is updated. 

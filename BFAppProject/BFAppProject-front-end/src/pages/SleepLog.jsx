@@ -1,11 +1,11 @@
 import React from 'react'
+import SleepLogForm from '../components/Forms/SleepLogForm'
 
 
 const SleepLog = () => {
   return (
     <div>
-     <h3> This is where info for Sleep Log Page will go... </h3>
-     <h4> The Sleep Log form will be placed here </h4>
+      <SleepLogForm />
     </div>
   )
 }
