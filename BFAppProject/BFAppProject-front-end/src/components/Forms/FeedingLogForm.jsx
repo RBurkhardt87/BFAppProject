@@ -5,32 +5,12 @@ import styles from '../../styling/FormStyling.module.css';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-const SleepLogForm = () => {
+const FeedingLogForm = () => {
 
-  const SleepLogSchema = Yup.object().shape({
+  const FeedingLogSchema = Yup.object().shape({
     date: Yup.date().required("Required"),
     startTime: Yup.string().required("Required"),
     stopTime: Yup.string().required("Required"),
-    sleepLocation: Yup.string(),
-    sleepQuality: Yup.string(),
-    mood: Yup.string(),
-    sleepPosition: Yup.string(),
-    swaddled: Yup.boolean(),
-    swaddleType: Yup.string().when("swaddled", {
-      is: true,
-      then: Yup.string().required("Required when swaddled is checked"),
-    }),
-    crying: Yup.boolean(),
-    cryingNotes: Yup.string().when("crying", {
-        is: true,
-        then: Yup.string().required("Required when crying is checked"),
-    }),
-    sleepAssociations: Yup.boolean(),
-    associationType: Yup.string().when("sleepAssociations", {
-        is: true,
-        then: Yup.string().required("Required when sleep associations is checked")
-    })
-
   });
 
   return (
@@ -42,26 +22,16 @@ const SleepLogForm = () => {
                     date: "",
                     startTime: "",
                     stopTime: "",
-                    sleepLocation: "",
-                    sleepQuality: "",
-                    mood: "",
-                    sleepPosition: "",
-                    swaddled: false,
-                    swaddleType: "",
-                    crying: false,
-                    cryingNotes: "",
-                    sleepAssociations: false,
-                    associationType: ""
                 }}
-                validationSchema={SleepLogSchema}
+                validationSchema={FeedingLogSchema}
                 onSubmit={(values) => {
                     console.log("Form Data Submitted:", values);  
                 }}
                 >
-                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue }) => (
+                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, resetForm }) => (
                     
                     <form onSubmit={handleSubmit}>
-                        <p className="form-header">Sleep Log Entry</p>
+                        <p className="form-header">Feeding Log Entry</p>
 
                         <TextField
                             fullWidth
@@ -117,198 +87,10 @@ const SleepLogForm = () => {
                         </Box>
 
 
-                        <Box sx={{ display: 'flex', gap: 2, marginTop: '20px' }}>
-                            <FormControl fullWidth style={{ marginTop: '20px' }}>
-                                <InputLabel>Sleep Quality</InputLabel>
-                                <Select
-                                    label="Sleep Quality"
-                                    value={values.sleepQuality}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    name="sleepQuality"
-                                >
-                                    <MenuItem value="Light" title="Frequent awakenings or shifts, possibly not the most restful.">Light Sleep</MenuItem>
-                                    <MenuItem value="Interrupted" title="Interrupted sleep, but the baby is able to fall back asleep.">Interrupted Sleep</MenuItem>
-                                    <MenuItem value="Restless/Active" title="The baby moves around a lot during sleep.">Restless/Active Sleep</MenuItem>
-                                    <MenuItem value="Noisy" title="Sleep accompanied by sounds like grunting, whimpering, or mumbling.">Noisy Sleep</MenuItem>
-                                    <MenuItem value="Deep" title="Restful, undisturbed sleep with little to no movement.">Deep Sleep</MenuItem>
-                                </Select>
-                            </FormControl>                     
-
-                            <FormControl fullWidth style={{ marginTop: '20px' }}>
-                                <InputLabel>Waking Mood</InputLabel>
-                                <Select
-                                    label="Mood"
-                                    value={values.mood}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    name="mood"
-                                >
-                                    <MenuItem value="Happy" title="The baby wakes up smiling, giggling, or generally in a positive mood.">Happy</MenuItem>
-                                    <MenuItem value="Alert" title="The baby wakes up and seems curious and aware of their surroundings, with bright eyes and attention.">Alert</MenuItem>
-                                    <MenuItem value="Calm" title="The baby wakes up quietly, without fuss, and seems content but not overly energetic.">Calm</MenuItem>
-                                    <MenuItem value="Neutral" title="The baby wakes up without showing clear signs of either a good or bad mood.">Neutral</MenuItem>
-                                    <MenuItem value="Tired" title="The baby wakes up slowly, appearing disoriented or sleepy, but not as irritable.">Tired</MenuItem>
-                                    <MenuItem value="Fussy"title="The baby wakes up a little cranky or irritable (distressed or upset), possibly needing comfort or soothing.">Fussy</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
-
-
-                        <Box sx={{ display: 'flex', gap: 2, marginTop: '20px' }}>
-                            <FormControl fullWidth style={{ marginTop: '20px' }}>
-                                <InputLabel>Sleep Position</InputLabel>
-                                <Select
-                                    label="Sleep Position"
-                                    value={values.sleepPosition}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                    name="sleepPosition"
-                                    >
-                                    <MenuItem value="Side" title="Infant slept on side">Side</MenuItem>
-                                    <MenuItem value="Back" title="Infant slept on back">Back</MenuItem>
-                                    <MenuItem value="Tummy" title="Infant slept on tummy">Tummy</MenuItem>
-                                </Select>
-                            </FormControl>                     
-
-                            <FormControl fullWidth style={{ marginTop: '20px' }}>
-                                <InputLabel>Sleep Type</InputLabel>
-                                <Select
-                                label="Sleep Type"
-                                value={values.sleepType}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                name="sleepType"
-                                >
-                                    <MenuItem value="morning">Morning Nap</MenuItem>
-                                    <MenuItem value="afternoon">Afternoon Nap</MenuItem>
-                                    <MenuItem value="evening">Evening Nap</MenuItem>
-                                    <MenuItem value="nighttime">Nighttime Sleep</MenuItem>
-                                </Select>
-                            </FormControl>
-                        </Box>
-
-
-                        <TextField
-                            fullWidth
-                            label="Sleep Environment"
-                            variant="outlined"
-                            multiline
-                            rows={3}
-                            value={values.sleepEnvironment}
-                            title="Log about where infant slept, darkness of room, volume of external noises or white noises used."
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="sleepEnvironment"
-                            style={{ marginTop: '20px' }}
-                        />
-
-                      
-                        <FormControlLabel
-                            control={
-                            <Checkbox
-                                checked={values.swaddled}
-                                onChange={(e) => {
-                                    handleChange(e);                                        
-                                    setFieldValue("swaddled", e.target.checked);
-                                }}
-                                name="swaddled"
-                                color="primary"
-                            />
-                            }
-                            label="Infant Swaddled?"
-                            style={{ marginTop: '20px' }}
-                        />
-
                         
-                        {values.swaddled && (
-                            <TextField
-                            fullWidth
-                            label="Swaddle Type"
-                            variant="outlined"
-                            value={values.swaddleType}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="swaddleType"
-                            style={{ marginTop: '10px' }}
-                            error={touched.swaddleType && Boolean(errors.swaddleType)}
-                            helperText={touched.swaddleType && errors.swaddleType}
-                            />
-                        )}
-
-
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={values.crying}
-                                    onChange={(e) => {
-                                        handleChange(e);                                        
-                                        setFieldValue("crying", e.target.checked);
-                                    }}
-                                    name="crying"
-                                    color="primary"
-                                />
-                            }
-                            label="Infant Cried?"
-                            style={{ marginTop: '20px' }}
-                        />
-
-
-                        {values.crying && (
-                            <TextField
-                            fullWidth
-                            label="Crying & Consoling Notes"
-                            variant="outlined"
-                            multiline
-                            rows={4}
-                            value={values.cryingNotes}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="cryingNotes"
-                            style={{ marginTop: '10px' }}
-                            error={touched.cryingNotes && Boolean(errors.cryingNotes)}
-                            helperText={touched.cryingNotes && errors.cryingNotes}
-                            />
-                        )}
-
-
-                        <FormControlLabel
-                            control={
-                            <Checkbox
-                                checked={values.sleepAssociations}
-                                onChange={(e) => {
-                                    handleChange(e);                                        
-                                    setFieldValue("sleepAssociations", e.target.checked);
-                                }}
-                                name="sleepAssociations"
-                                color="primary"
-                            />
-                            }
-                            label="Any Sleep Associations?"
-                            title="sleep associations used like pacifier, white noise, rocking..."
-                            style={{ marginTop: '20px' }}
-                        />
-
-                        
-                        {values.sleepAssociations && (
-                            <TextField
-                            fullWidth
-                            label="Sleep Associations Used"
-                            variant="outlined"
-                            multiline
-                            rows={3}
-                            value={values.associationType}
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            name="associationType"
-                            style={{ marginTop: '10px' }}
-                            error={touched.associationType && Boolean(errors.associationType)}
-                            helperText={touched.associationType && errors.associationType}
-                            />
-                        )}
                        
                     
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2}}> 
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -316,6 +98,14 @@ const SleepLogForm = () => {
                                 className={styles.submitButton}  
                                 >
                                 Submit
+                            </Button>
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick={() => resetForm()}
+                                className={styles.resetButton}  
+                                >
+                                Reset Entry
                             </Button>
                         </Box>
                     </form>
@@ -327,4 +117,4 @@ const SleepLogForm = () => {
   );
 };
 
-export default SleepLogForm;
+export default FeedingLogForm;

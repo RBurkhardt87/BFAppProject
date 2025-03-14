@@ -13,6 +13,7 @@ const SleepLogForm = () => {
     stopTime: Yup.string().required("Required"),
     sleepLocation: Yup.string(),
     sleepQuality: Yup.string(),
+    sleepType: Yup.string(),
     mood: Yup.string(),
     sleepPosition: Yup.string(),
     swaddled: Yup.boolean(),
@@ -44,6 +45,7 @@ const SleepLogForm = () => {
                     stopTime: "",
                     sleepLocation: "",
                     sleepQuality: "",
+                    sleepType: "",
                     mood: "",
                     sleepPosition: "",
                     swaddled: false,
@@ -58,7 +60,7 @@ const SleepLogForm = () => {
                     console.log("Form Data Submitted:", values);  
                 }}
                 >
-                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue }) => (
+                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, resetForm }) => (
                     
                     <form onSubmit={handleSubmit}>
                         <p className="form-header">Sleep Log Entry</p>
@@ -174,11 +176,11 @@ const SleepLogForm = () => {
                             <FormControl fullWidth style={{ marginTop: '20px' }}>
                                 <InputLabel>Sleep Type</InputLabel>
                                 <Select
-                                label="Sleep Type"
-                                value={values.sleepType}
-                                onChange={handleChange}
-                                onBlur={handleBlur}
-                                name="sleepType"
+                                    label="Sleep Type"
+                                    value={values.sleepType}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    name="sleepType"
                                 >
                                     <MenuItem value="morning">Morning Nap</MenuItem>
                                     <MenuItem value="afternoon">Afternoon Nap</MenuItem>
@@ -308,7 +310,7 @@ const SleepLogForm = () => {
                         )}
                        
                     
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2}}> 
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -316,6 +318,14 @@ const SleepLogForm = () => {
                                 className={styles.submitButton}  
                                 >
                                 Submit
+                            </Button>
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick={() => resetForm()}
+                                className={styles.resetButton}  
+                                >
+                                Reset Entry
                             </Button>
                         </Box>
                     </form>

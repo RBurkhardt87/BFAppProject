@@ -24,12 +24,16 @@ const LoginForm = () => {
                     type="submit"
                     className={styles.submitButton}  
                     >
-                    Submit
+                    Login
                 </Button>
             </Box>
+            <br />
+            <br />
         </form>
       </Card>
     </Paper>
+    <br />
+    <h3>If you do not have an account yet, please <a href="/register">sign up here</a>.</h3>
   </div>
   )
 }

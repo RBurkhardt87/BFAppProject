@@ -5,7 +5,7 @@ import styles from '../../styling/FormStyling.module.css';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 
-const SleepLogForm = () => {
+const DiaperLogForm = () => {
 
   const DiaperLogSchema = Yup.object().shape({
     date: Yup.date().required("Required"),
@@ -13,21 +13,36 @@ const SleepLogForm = () => {
     pooped: Yup.boolean(),
     poopType: Yup.string().when("poop", {
         is: true,
-        then: Yup.string().required("Required when pooped is checked"),
+        then: Yup.string(),
     }),
     poopAmount: Yup.string().when("pooped", {
         is: true,
-        then: Yup.string().required("Required when pooped is checked"),
+        then: Yup.string(),
     }),
     urinated: Yup.boolean(),
     urineType: Yup.string().when("urinated", {
         is: true,
-        then: Yup.string().required("Required when urinated is checked"),
+        then: Yup.string(),
     }),
     urineAmount: Yup.string().when("urinated", {
         is: true,
-        then: Yup.string().required("Required when urinated is checked"),
+        then: Yup.string(),
     }), 
+    blowout: Yup.boolean(),
+    diaperSize: Yup.string().when("blowout", {
+        is: true,
+        then: Yup.string(),
+    }),
+    diaperBrand: Yup.string().when("blowout", {
+        is: true, 
+        then: Yup.string(),       
+    }),
+    diaperRash: Yup.boolean(),
+    rashSigns: Yup.string().when("diaperRash", {
+        is: true,
+        then: Yup.string(),
+    }),
+    note: Yup.string(),
   });
 
   return (
@@ -39,14 +54,20 @@ const SleepLogForm = () => {
                     date: "",
                     time: "",
                     pooped: false,
-                    poopType: ""
+                    poopType: "",
+                    blowout: false, 
+                    diaperSize: "",
+                    diaperBrand: "",
+                    diaperRash: false,
+                    rashSigns: "",
+                    notes: ""
                 }}
                 validationSchema={DiaperLogSchema}
                 onSubmit={(values) => {
                     console.log("Form Data Submitted:", values);  
                 }}
                 >
-                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue }) => (
+                {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, resetForm }) => (
                     
                     <form onSubmit={handleSubmit}>
                         <p className="form-header">Diaper Log Entry</p>
@@ -113,14 +134,21 @@ const SleepLogForm = () => {
                                     onBlur={handleBlur}
                                     name="stoolType"
                                 >
-                                    <MenuItem value="Light" title="Frequent awakenings or shifts, possibly not the most restful.">Light Sleep</MenuItem>
-                                    <MenuItem value="Interrupted" title="Interrupted sleep, but the baby is able to fall back asleep.">Interrupted Sleep</MenuItem>
-                                    <MenuItem value="Restless/Active" title="The baby moves around a lot during sleep.">Restless/Active Sleep</MenuItem>
-                                    <MenuItem value="Noisy" title="Sleep accompanied by sounds like grunting, whimpering, or mumbling.">Noisy Sleep</MenuItem>
-                                    <MenuItem value="Deep" title="Restful, undisturbed sleep with little to no movement.">Deep Sleep</MenuItem>
+                                    <MenuItem value="meconium" title="black, tar-like; newborns">Meconium</MenuItem>
+                                    <MenuItem value="greenish" title="Transitional stool, often a mix of brown and green, typical of newborns">Greenish</MenuItem>
+                                    <MenuItem value="mustardYellow" title="Seedy and soft in texture. Light yellowish-brown in color">Mustard Yellow</MenuItem>
+                                    <MenuItem value="brown" title="smooth and often similar to adult stool. Normal for formula-fed babies">Brown</MenuItem>
+                                    <MenuItem value="green" title="Pasty or grainy texture with a green hue">Green</MenuItem>
+                                    <MenuItem value="mucuosy" title="May look like lettuce or slimy"> Stool</MenuItem>
+                                    <MenuItem value="pellet" title="Small, firm stool. Pellet-like">Hard/Pellet-like</MenuItem>
+                                    <MenuItem value="watery" title="Loose, liquid stool">Watery Stool</MenuItem>
+                                    <MenuItem value="bloody" title="streaks of blood in stool">Stool Contains Bloody Streaks</MenuItem>
+
                                 </Select>
                             </FormControl>                     
-                       
+
+
+
                             <FormControl fullWidth style={{ marginTop: '20px' }}>
                                 <InputLabel>Stool Amount</InputLabel>
                                 <Select
@@ -130,11 +158,9 @@ const SleepLogForm = () => {
                                     onBlur={handleBlur}
                                     name="stoolAmount"
                                 >
-                                    <MenuItem value="Light" title="Frequent awakenings or shifts, possibly not the most restful.">Light Sleep</MenuItem>
-                                    <MenuItem value="Interrupted" title="Interrupted sleep, but the baby is able to fall back asleep.">Interrupted Sleep</MenuItem>
-                                    <MenuItem value="Restless/Active" title="The baby moves around a lot during sleep.">Restless/Active Sleep</MenuItem>
-                                    <MenuItem value="Noisy" title="Sleep accompanied by sounds like grunting, whimpering, or mumbling.">Noisy Sleep</MenuItem>
-                                    <MenuItem value="Deep" title="Restful, undisturbed sleep with little to no movement.">Deep Sleep</MenuItem>
+                                    <MenuItem value="lightPoop">Lightly Soiled</MenuItem>
+                                    <MenuItem value="moderatePoop">Moderately Soiled</MenuItem>
+                                    <MenuItem value="heavyPoop">Heavily Soiled</MenuItem>
                                 </Select>
                             </FormControl>    
                             </Box>                 
@@ -169,13 +195,13 @@ const SleepLogForm = () => {
                                         onBlur={handleBlur}
                                         name="urineType"
                                     >
-                                        <MenuItem value="Light" title="Frequent awakenings or shifts, possibly not the most restful.">Light Sleep</MenuItem>
-                                        <MenuItem value="Interrupted" title="Interrupted sleep, but the baby is able to fall back asleep.">Interrupted Sleep</MenuItem>
-                                        <MenuItem value="Restless/Active" title="The baby moves around a lot during sleep.">Restless/Active Sleep</MenuItem>
-                                        <MenuItem value="Noisy" title="Sleep accompanied by sounds like grunting, whimpering, or mumbling.">Noisy Sleep</MenuItem>
-                                        <MenuItem value="Deep" title="Restful, undisturbed sleep with little to no movement.">Deep Sleep</MenuItem>
+                                        <MenuItem value="clear">Clear</MenuItem>
+                                        <MenuItem value="paleYellow">Pale Yellow (Normal)</MenuItem>
+                                        <MenuItem value="darkYellow">Dark Yellow</MenuItem>
+                                        <MenuItem value="Orange">Orange</MenuItem>
+                                        <MenuItem value="pink-tinged">Pink-tinged (uric acid crystals)</MenuItem>
                                     </Select>
-                                </FormControl>                     
+                                </FormControl>                   
 
                                 <FormControl fullWidth style={{ marginTop: '20px' }}>
                                     <InputLabel>Urine Amount</InputLabel>
@@ -186,21 +212,113 @@ const SleepLogForm = () => {
                                         onBlur={handleBlur}
                                         name="urineAmount"
                                     >
-                                        <MenuItem value="Light" title="Frequent awakenings or shifts, possibly not the most restful.">Light Sleep</MenuItem>
-                                        <MenuItem value="Interrupted" title="Interrupted sleep, but the baby is able to fall back asleep.">Interrupted Sleep</MenuItem>
-                                        <MenuItem value="Restless/Active" title="The baby moves around a lot during sleep.">Restless/Active Sleep</MenuItem>
-                                        <MenuItem value="Noisy" title="Sleep accompanied by sounds like grunting, whimpering, or mumbling.">Noisy Sleep</MenuItem>
-                                        <MenuItem value="Deep" title="Restful, undisturbed sleep with little to no movement.">Deep Sleep</MenuItem>
+                                        <MenuItem value="lightPee">Lightly Soiled</MenuItem>
+                                        <MenuItem value="moderatePee">Moderately Soiled</MenuItem>
+                                        <MenuItem value="heavyPee">Heavily Soiled</MenuItem>
                                     </Select>
                                 </FormControl>  
                             </Box>                   
                         )}
 
 
+                        <FormControlLabel
+                            control={
+                            <Checkbox
+                                checked={values.blowout}
+                                onChange={(e) => {
+                                    handleChange(e);                                        
+                                    setFieldValue("blowout", e.target.checked);
+                                }}
+                                name="blowout"
+                                color="primary"
+                            />
+                            }
+                            label="Diaper Blowout?"
+                            style={{ marginTop: '20px' }}
+                        />
 
+                        {values.blowout && (
+                            <Box sx={{ display: 'flex', gap: 2, marginTop: '20px' }}>
+                                <TextField
+                                    fullWidth
+                                    label="Diaper Size"
+                                    variant="outlined"
+                                    value={values.diaperSize}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    name="diaperSize"
+                                    InputLabelProps={{
+                                    shrink: true,
+                                    }}
+                                />
+                                <TextField
+                                    fullWidth
+                                    label="Diaper Brand"
+                                    variant="outlined"
+                                    value={values.diaperBrand}
+                                    onChange={handleChange}
+                                    onBlur={handleBlur}
+                                    name="diaperBrand"
+                                    InputLabelProps={{
+                                        shrink: true,
+                                    }}
+                                />
+                            </Box>
+                        )}
+
+
+                        <FormControlLabel
+                            control={
+                            <Checkbox
+                                checked={values.diaperRash}
+                                onChange={(e) => {
+                                    handleChange(e);                                        
+                                    setFieldValue("diaperRash", e.target.checked);
+                                }}
+                                name="diaperRash"
+                                color="primary"
+                            />
+                            }
+                            label="Diaper Rash Present?"
+                            style={{ marginTop: '20px' }}
+                        />
+
+                        {values.diaperRash && (
+                            
+                            <TextField
+                                fullWidth
+                                label="Signs of Rash"
+                                variant="outlined"
+                                multiline
+                                rows={3}
+                                value={values.rashSigns}
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                name="rashSigns"
+                                InputLabelProps={{
+                                shrink: true,
+                                }}
+                            />
+                        )}
+
+
+                        <TextField
+                            fullWidth
+                            label="Additional Notes"
+                            variant="outlined"
+                            multiline
+                            rows={3}
+                            value={values.notes}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            name="notes"
+                            InputLabelProps={{
+                            shrink: true,
+                            }}
+                        />
                        
                     
-                        <Box sx={{ display: 'flex', justifyContent: 'center'}}>
+                        <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2}}> 
                             <Button
                                 variant="contained"
                                 color="primary"
@@ -209,14 +327,23 @@ const SleepLogForm = () => {
                                 >
                                 Submit
                             </Button>
+                            <Button 
+                                variant="contained"
+                                color="primary"
+                                onClick={() => resetForm()}
+                                className={styles.resetButton}  
+                                >
+                                Reset Entry
+                            </Button>
                         </Box>
                     </form>
                 )}
                 </Formik>
+                <br />
             </Card>
         </Paper>
     </div>
   );
 };
 
-export default SleepLogForm;
+export default DiaperLogForm;
