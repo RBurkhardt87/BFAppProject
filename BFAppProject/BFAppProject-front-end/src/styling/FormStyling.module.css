@@ -4,20 +4,20 @@
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
-    max-width: 600px; 
+    max-width: 800px; 
     display: flex;        
     flex-direction: column; 
     justify-content: space-between; 
     height: 100%;         
 }
 
-.formContainerSleepLog {
+.formContainerLogs {
     padding: 20px;
     background-color: rgba(0, 128, 128, 0.622);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
-    max-width: 600px; 
+    max-width: 800px; 
     display: flex;        
     flex-direction: column; 
     justify-content: space-between; 
