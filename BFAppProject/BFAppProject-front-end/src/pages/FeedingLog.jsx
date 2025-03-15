@@ -32,6 +32,9 @@ const FeedingLog = () => {
       <Button variant="contained" color="primary" onClick={handleOpen}>
         + Add Feeding Log Entry
       </Button>
+      <br/>
+      <br />
+      
 
       
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">

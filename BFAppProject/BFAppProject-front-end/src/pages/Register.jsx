@@ -6,6 +6,9 @@ const Register = () => {
   return (
     <div>
       <RegistrationForm />
+      <br />
+      <br/>
+      <br />
     </div>
   )
 }

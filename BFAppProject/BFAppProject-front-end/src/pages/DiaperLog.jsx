@@ -30,6 +30,8 @@ const DiaperLog = () => {
       <Button variant="contained" color="primary" onClick={handleOpen}>
         + Add Diaper Log Entry
       </Button>
+      <br />
+      <br />
 
       
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">

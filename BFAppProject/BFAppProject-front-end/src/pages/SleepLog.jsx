@@ -31,6 +31,8 @@ const SleepLog = () => {
       <Button variant="contained" color="primary" onClick={handleOpen}>
         + Add Sleep Log Entry
       </Button>
+      <br />
+      <br />
 
       
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
