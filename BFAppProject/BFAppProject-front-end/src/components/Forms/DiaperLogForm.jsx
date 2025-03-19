@@ -11,7 +11,7 @@ const DiaperLogForm = () => {
     date: Yup.date().required("Required"),
     time: Yup.string().required("Required"),
     pooped: Yup.boolean(),
-    poopType: Yup.string().when("poop", {
+    poopType: Yup.string().when("pooped", {
         is: true,
         then: Yup.string(),
     }),

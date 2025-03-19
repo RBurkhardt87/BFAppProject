@@ -33,6 +33,11 @@
     justify-content: space-between; 
 }
 
+.checkboxGroup {
+    font-weight: bold;
+    font-size: 18px;
+}
+
 .submitButton {
     width: 30%;
     display: block;
