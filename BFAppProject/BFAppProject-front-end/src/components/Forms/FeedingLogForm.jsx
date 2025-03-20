@@ -88,7 +88,7 @@ const FeedingLogForm = () => {
                 {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, resetForm }) => (
                     
                     <form onSubmit={handleSubmit}>
-                        <p className="form-header">Feeding Log Entry</p>
+                        <p className="form-header">Nursing Log Entry</p>
 
                         <TextField
                             fullWidth

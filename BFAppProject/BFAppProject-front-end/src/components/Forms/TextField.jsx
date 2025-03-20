@@ -10,10 +10,10 @@ const TextField = ({ label, ...props }) => (
       width: '100%',
       '& .MuiOutlinedInput-root': {
         '&:hover .MuiOutlinedInput-notchedOutline': {
-          borderColor: 'orangered',
+          borderColor: 'rgb(204, 78, 95)',
         },
         '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
-          borderColor: 'orangered',
+          borderColor: 'rgb(204, 78, 95)',
         },
       },
       '& .MuiInputLabel-root.Mui-focused': {

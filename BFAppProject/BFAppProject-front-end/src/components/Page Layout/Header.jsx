@@ -1,6 +1,7 @@
 import React from 'react'
 import '../../styling/Layout.css'
 
+
 const Header = ({ pageName }) => {
 
   

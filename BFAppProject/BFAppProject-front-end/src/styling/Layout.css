@@ -1,49 +1,91 @@
-
-
 header {
+    background-image: url("/images/headerImage.jpg"); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     background-color: rgba(255, 68, 0, 0.447);
-    padding: 8px;
+    padding: 2vh 5vw;
     text-align: center;
-    border-radius: "8px";
-    border: 2px solid orangered;
-    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-size: 30px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    border-top: 2px solid rgba(255, 47, 0, 0.566);
+    border-left: 2px solid rgba(255, 47, 0, 0.566);
+    border-right: 2px solid rgba(255, 47, 0, 0.566);
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    height: auto;
+    min-height: 20vh;
+}
+
+@media (max-width: 768px) {
+    header {
+        font-size: 1.5rem;
+        padding: 5px 10px;
+        min-height: 15vh;
+    }
+}
+
+@media (max-width: 480px) {
+    header {
+        font-size: 1.2rem;
+        padding: 5px;
+        min-height: 12vh;
+    }
 }
 
 .page-header {
     text-align: center;
     color: teal;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: clamp(0.875rem, 2vw, 1.25rem);
+    margin-bottom: 10px;
 }
 
 .form-header {
     text-align: center;
-    color: orangered;
-    font-size: 30px;
+    color: rgb(204, 78, 95);
+    font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: bold;
-    margin: 10px;
+    margin: 10px auto;
+    max-width: 90%;
+}
+ 
+
+.main-background {
+    background-image: url('/images/smoothBackground.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    min-height: 100vh; /* Ensure it covers at least the full viewport */
+    display: flex;
+    flex-direction: column;
 }
 
 .layout-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Full viewport height */
+    flex: 1; /* Takes up available space, ensuring footer is at the bottom */
+    min-height: 100vh; /* Minimum full viewport height */
 }
 
 .content {
-    flex: 1; /* Makes the content take up all available space */
+    flex: 1; /* Pushes the footer down */
+    max-width: 1200px;
+    margin: auto;
+    width: 100%;
+    padding: 10px;
 }
 
 .footer {
-    background-color: rgba(255, 68, 0, 0.447);
-    padding: 5px;
+    background-color: rgba(255, 47, 0, 0.178);
+    padding: 10px;
     text-align: center;
     color: black;
     font-size: 14px;
-    border-top: 2px solid orangered;   
+    border: 2px solid rgba(255, 47, 0, 0.566); 
+    border-radius: 8px;  
+    width: 100%; 
+    box-sizing: border-box;
 }
 
-
-
-
-  

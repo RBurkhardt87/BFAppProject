@@ -11,6 +11,8 @@ import Register from "./pages/Register";
 import SleepLog from "./pages/SleepLog";
 import DiaperLog from "./pages/DiaperLog";
 import FeedingLog from "./pages/FeedingLog";
+import PumpingLog from "./pages/PumpingLog";
+import BottleFeedingLog from "./pages/BottleFeedingLog";
 import Nutrition from "./pages/Nutrition";
 import Resources from "./pages/Resources";
 import Navbar from "./components/Navigation/Navbar";
@@ -29,7 +31,9 @@ function MainLayout() {
     "/register": "Registration",
     "/sleep-log": "Sleep Log",
     "/diaper-log": "Diaper Log",
-    "/feeding-log": "Feeding Log",
+    "/nursing-log": "Nursing Log",
+    "/pumping-log": "Pumping Log",
+    "/bottle-feeding-log": "Bottle Feeding Log",
     "/nutrition": "Nutrition",
     "/resources": "Resources",
   };
@@ -37,7 +41,8 @@ function MainLayout() {
   const currentPage = pageTitles[location.pathname] || "Page";
 
   return (
-    <div className="layout-container">
+    <div className="main-background">
+    <div className="layout-container"> 
       <header>
         <h1>Breastfeeding Application</h1>
       </header>
@@ -55,7 +60,9 @@ function MainLayout() {
           <Route path="/register" element={<Register />} />
           <Route path="/sleep-log" element={<SleepLog />} />
           <Route path="/diaper-log" element={<DiaperLog />} />
-          <Route path="/feeding-log" element={<FeedingLog />} />
+          <Route path="/nursing-log" element={<FeedingLog />} />
+          <Route path="pumping-log" element={<PumpingLog />} />
+          <Route path="bottle-feeding-log" element={<BottleFeedingLog />} />
           <Route path="/nutrition" element={<Nutrition />} />
           <Route path="/resources" element={<Resources />} />
           <Route path="*" element={<NoPage />} />
@@ -64,6 +71,7 @@ function MainLayout() {
 
       <hr />
       <Footer />
+    </div>
     </div>
   );
 }

@@ -30,7 +30,7 @@ const FeedingLog = () => {
 
       
       <Button variant="contained" color="primary" onClick={handleOpen}>
-        + Add Feeding Log Entry
+        + Add Nursing Log Entry
       </Button>
       <br/>
       <br />
@@ -39,7 +39,7 @@ const FeedingLog = () => {
       
       <Dialog open={open} onClose={handleClose} fullWidth maxWidth="md">
         <DialogTitle>
-          Log Feeding Entry
+          Log Nursing Entry
           <IconButton 
             aria-label="close" 
             onClick={handleClose} 
