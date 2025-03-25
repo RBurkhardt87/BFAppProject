@@ -22,17 +22,16 @@ public class UserController {
         this.userService = userService;
     }
 
+
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody UserRequestDTO userRequestDTO) {
+    public ResponseEntity<UserResponseDTO> registerUser(@RequestBody UserRequestDTO userRequestDTO) {
         try {
             User savedUser = userService.saveUser(userRequestDTO);
             UserResponseDTO responseDTO = userService.convertToDTO(savedUser);
-            return ResponseEntity.ok("New Registered User: " + responseDTO);
-        } catch (Error e) {
-            return ResponseEntity.badRequest().body("Error:" + e.getMessage());
+            return ResponseEntity.ok(responseDTO);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
-
-
 
 }

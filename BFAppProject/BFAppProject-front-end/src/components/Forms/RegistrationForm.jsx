@@ -4,8 +4,7 @@ import styles from '../../styling/FormStyling.module.css';
 import TextField from '../Forms/TextField';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-// import { registerUser } from '../../services/UserService';
-import axios from "axios";
+import { registerUser } from '../../services/UserService';
 
 
 
@@ -22,27 +21,16 @@ const RegistrationForm = () => {
         .required("Verify password is required"),
     });
  
-    // const handleSubmit = async (values, { resetForm }) => {
-    //   try {
-    //     await registerUser(values);
-    //     alert("User has been registered!");
-    //     resetForm();
-    //   } catch (error) {
-    //     alert("Something went wrong. Please try again.");
-    //   }
-    // };
-
     const handleSubmit = async (values, { resetForm }) => {
       try {
-          const response = await axios.post("http://localhost:8080/api/users/register", values);
-          console.log("Registration successfully submitted:", response.data);
-          alert("User has been registered!");
-          resetForm();
+        await registerUser(values); 
+        alert("User has been registered!"); 
+        resetForm();
       } catch (error) {
-          console.error("Error registering user:", error);
-          alert("Something went wrong. Please try again.");
+        alert("Something went wrong. Please try again.");
       }
     };
+    
 
 
   return (
