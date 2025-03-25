@@ -6,16 +6,13 @@ import BFAppProject.models.User;
 import BFAppProject.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-    // TODO: Think about creating an Exceptions Class to customize the exceptions to be more specific to username or password already exist
+// TODO: Think about creating an Exceptions Class to customize the exceptions to be more specific to username or password already exist
 
-
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
     @Autowired
