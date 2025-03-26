@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 
 @Entity
@@ -40,10 +40,12 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "date_created",
-            columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP",
-            updatable = false, insertable = false)
-    private LocalDateTime dateCreated;
+    private LocalDate dateCreated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreated = LocalDate.now();
+    }
 
 
     /* NOTE:
@@ -57,6 +59,7 @@ public class User {
     }
 
     public User(String firstName, String lastName, String username, String email, String password) {
+        this.dateCreated = LocalDate.now();
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
@@ -69,7 +72,7 @@ public class User {
         return id;
     }
 
-    public LocalDateTime getDateCreated() {
+    public LocalDate getDateCreated() {
         return dateCreated;
     }
 

@@ -1,13 +1,11 @@
 package BFAppProject.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -16,6 +14,13 @@ public class SleepLogEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private LocalDate dateCreated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreated = LocalDate.now();
+    }
 
     @NotNull(message = "Must enter a date")
     @Past(message = "This is a future date, please try again")
@@ -27,7 +32,6 @@ public class SleepLogEntry {
     @NotBlank(message = "You must pick a stop time")
     private String stopTime;
 
-    private String sleepLocation;
     private String sleepQuality;
     private String sleepType;
     private String mood;
@@ -39,16 +43,17 @@ public class SleepLogEntry {
     private Boolean sleepAssociations;
     private String associationType;
 
+
     public SleepLogEntry() {
     }
 
-    public SleepLogEntry(Date date, String startTime, String stopTime, String sleepLocation, String sleepQuality,
+    public SleepLogEntry(Date date, String startTime, String stopTime, String sleepQuality,
                          String sleepType, String mood, String sleepPosition, Boolean swaddled, String swaddleType,
                          Boolean crying, String cryingNotes, Boolean sleepAssociations, String associationType) {
+        this.dateCreated = LocalDate.now();
         this.date = date;
         this.startTime = startTime;
         this.stopTime = stopTime;
-        this.sleepLocation = sleepLocation;
         this.sleepQuality = sleepQuality;
         this.sleepType = sleepType;
         this.mood = mood;
@@ -65,6 +70,10 @@ public class SleepLogEntry {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
     public Date getDate() {
@@ -89,14 +98,6 @@ public class SleepLogEntry {
 
     public void setStopTime(String stopTime) {
         this.stopTime = stopTime;
-    }
-
-    public String getSleepLocation() {
-        return sleepLocation;
-    }
-
-    public void setSleepLocation(String sleepLocation) {
-        this.sleepLocation = sleepLocation;
     }
 
     public String getSleepQuality() {

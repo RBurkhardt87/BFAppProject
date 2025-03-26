@@ -1,12 +1,11 @@
 package BFAppProject.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +15,13 @@ public class NurseLogEntry {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private LocalDate dateCreated;
+
+    @PrePersist
+    protected void onCreate() {
+        this.dateCreated = LocalDate.now();
+    }
 
     @NotNull(message = "You must pick a date")
     private Date date;
@@ -64,6 +70,7 @@ public class NurseLogEntry {
                          Boolean isBreastRedness, Boolean isBreastSoft, Boolean isBreastPain, String maternalNotes,
                          Boolean isClickingPresent, Boolean isInfantSputtering, Boolean isActiveFeeding, Boolean isInfantSleepy,
                          List<String> infantFeedingCues, String infantNotes, String sessionNotes) {
+        this.dateCreated = LocalDate.now();
         this.date = date;
         this.leftSide = leftSide;
         this.leftStartTime = leftStartTime;
@@ -91,6 +98,10 @@ public class NurseLogEntry {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
     public Date getDate() {

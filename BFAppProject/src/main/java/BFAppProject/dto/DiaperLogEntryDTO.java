@@ -1,26 +1,16 @@
-package BFAppProject.models;
+package BFAppProject.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.Date;
 
-@Entity
-public class DiaperLogEntry {
+public class DiaperLogEntryDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private LocalDate dateCreated;
-
-    @PrePersist
-    protected void onCreate() {
-        this.dateCreated = LocalDate.now();
-    }
+    private final LocalDate dateCreated;
 
     @NotNull(message = "You must pick a date")
     private Date date;
@@ -48,13 +38,16 @@ public class DiaperLogEntry {
     private String rashSigns;
     private String notes;
 
-    public DiaperLogEntry() {
+
+    public DiaperLogEntryDTO(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public DiaperLogEntry(Date date, String time, Boolean isPooped, String stoolType, String stoolAmount,
+    public DiaperLogEntryDTO(Long id, LocalDate dateCreated, Date date, String time, Boolean isPooped, String stoolType, String stoolAmount,
                              Boolean isUrinated, String urineType, String urineAmount, Boolean isBlowout, String diaperSize,
                              String diaperBrand, Boolean isDiaperRash, String rashSigns, String note) {
-        this.dateCreated = LocalDate.now();
+        this.id = id;
+        this.dateCreated = dateCreated;
         this.date = date;
         this.time = time;
         this.isPooped = isPooped;
@@ -95,11 +88,11 @@ public class DiaperLogEntry {
         this.time = time;
     }
 
-    public Boolean getPooped() {
+    public Boolean getIsPooped() {
         return isPooped;
     }
 
-    public void setPooped(Boolean pooped) {
+    public void setIsPooped(Boolean pooped) {
         isPooped = pooped;
     }
 
@@ -119,11 +112,11 @@ public class DiaperLogEntry {
         this.stoolAmount = stoolAmount;
     }
 
-    public Boolean getUrinated() {
+    public Boolean getIsUrinated() {
         return isUrinated;
     }
 
-    public void setUrinated(Boolean urinated) {
+    public void setIsUrinated(Boolean urinated) {
         isUrinated = urinated;
     }
 
@@ -143,11 +136,11 @@ public class DiaperLogEntry {
         this.urineAmount = urineAmount;
     }
 
-    public Boolean getBlowout() {
+    public Boolean getIsBlowout() {
         return isBlowout;
     }
 
-    public void setBlowout(Boolean blowout) {
+    public void setIsBlowout(Boolean blowout) {
         isBlowout = blowout;
     }
 
@@ -167,11 +160,11 @@ public class DiaperLogEntry {
         this.diaperBrand = diaperBrand;
     }
 
-    public Boolean getDiaperRash() {
+    public Boolean getIsDiaperRash() {
         return isDiaperRash;
     }
 
-    public void setDiaperRash(Boolean diaperRash) {
+    public void setIsDiaperRash(Boolean diaperRash) {
         isDiaperRash = diaperRash;
     }
 
@@ -190,5 +183,6 @@ public class DiaperLogEntry {
     public void setNotes(String notes) {
         this.notes = notes;
     }
+
 
 }

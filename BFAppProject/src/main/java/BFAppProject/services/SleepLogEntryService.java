@@ -2,10 +2,7 @@ package BFAppProject.services;
 
 import BFAppProject.data.SleepLogEntryRepository;
 import BFAppProject.dto.SleepLogEntryDTO;
-import BFAppProject.dto.UserRequestDTO;
-import BFAppProject.dto.UserResponseDTO;
 import BFAppProject.models.SleepLogEntry;
-import BFAppProject.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +23,6 @@ public class SleepLogEntryService {
                 sleepLogEntryDTO.getDate(),
                 sleepLogEntryDTO.getStartTime(),
                 sleepLogEntryDTO.getStopTime(),
-                sleepLogEntryDTO.getSleepLocation(),
                 sleepLogEntryDTO.getSleepQuality(),
                 sleepLogEntryDTO.getSleepType(),
                 sleepLogEntryDTO.getMood(),
@@ -45,10 +41,11 @@ public class SleepLogEntryService {
 
     public SleepLogEntryDTO convertToDTO(SleepLogEntry sleepLogEntry) {
         return new SleepLogEntryDTO(
+                sleepLogEntry.getId(),
+                sleepLogEntry.getDateCreated(),
                 sleepLogEntry.getDate(),
                 sleepLogEntry.getStartTime(),
                 sleepLogEntry.getStopTime(),
-                sleepLogEntry.getSleepLocation(),
                 sleepLogEntry.getSleepQuality(),
                 sleepLogEntry.getSleepType(),
                 sleepLogEntry.getMood(),

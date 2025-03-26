@@ -4,11 +4,13 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class SleepLogEntryDTO {
 
     private Long id;
+    private final LocalDate dateCreated;
 
     @NotNull(message = "Must enter a date")
     @Past(message = "This is a future date, please try again")
@@ -20,7 +22,6 @@ public class SleepLogEntryDTO {
     @NotBlank(message = "You must pick a stop time")
     private String stopTime;
 
-    private String sleepLocation;
     private String sleepQuality;
     private String sleepType;
     private String mood;
@@ -33,17 +34,18 @@ public class SleepLogEntryDTO {
     private String associationType;
 
 
-    public SleepLogEntryDTO() {
+    public SleepLogEntryDTO(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public SleepLogEntryDTO(Date date, String startTime, String stopTime, String sleepLocation,
+    public SleepLogEntryDTO(Long id, LocalDate dateCreated, Date date, String startTime, String stopTime,
                             String sleepQuality, String sleepType, String mood, String sleepPosition, Boolean swaddled,
                             String swaddleType, Boolean crying, String cryingNotes, Boolean sleepAssociations, String associationType) {
-
+        this.id = id;
+        this.dateCreated = dateCreated;
         this.date = date;
         this.startTime = startTime;
         this.stopTime = stopTime;
-        this.sleepLocation = sleepLocation;
         this.sleepQuality = sleepQuality;
         this.sleepType = sleepType;
         this.mood = mood;
@@ -58,6 +60,10 @@ public class SleepLogEntryDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
     public Date getDate() {
@@ -82,14 +88,6 @@ public class SleepLogEntryDTO {
 
     public void setStopTime(String stopTime) {
         this.stopTime = stopTime;
-    }
-
-    public String getSleepLocation() {
-        return sleepLocation;
-    }
-
-    public void setSleepLocation(String sleepLocation) {
-        this.sleepLocation = sleepLocation;
     }
 
     public String getSleepQuality() {

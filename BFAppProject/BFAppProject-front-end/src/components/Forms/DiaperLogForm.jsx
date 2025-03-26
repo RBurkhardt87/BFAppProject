@@ -4,46 +4,36 @@ import TextField from '../Forms/TextField';
 import styles from '../../styling/FormStyling.module.css';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import { submitDiaperEntry } from '../../services/DiaperLogService';
 
 const DiaperLogForm = () => {
 
   const DiaperLogSchema = Yup.object().shape({
     date: Yup.date().required("Required"),
     time: Yup.string().required("Required"),
-    pooped: Yup.boolean(),
-    poopType: Yup.string().when("pooped", {
-        is: true,
-        then: Yup.string(),
-    }),
-    poopAmount: Yup.string().when("pooped", {
-        is: true,
-        then: Yup.string(),
-    }),
-    urinated: Yup.boolean(),
-    urineType: Yup.string().when("urinated", {
-        is: true,
-        then: Yup.string(),
-    }),
-    urineAmount: Yup.string().when("urinated", {
-        is: true,
-        then: Yup.string(),
-    }), 
-    blowout: Yup.boolean(),
-    diaperSize: Yup.string().when("blowout", {
-        is: true,
-        then: Yup.string(),
-    }),
-    diaperBrand: Yup.string().when("blowout", {
-        is: true, 
-        then: Yup.string(),       
-    }),
-    diaperRash: Yup.boolean(),
-    rashSigns: Yup.string().when("diaperRash", {
-        is: true,
-        then: Yup.string(),
-    }),
+    isPooped: Yup.boolean(),
+    stoolType: Yup.string(),
+    stoolAmount: Yup.string(),
+    isUrinated: Yup.boolean(),
+    urineType: Yup.string(),
+    urineAmount: Yup.string(),
+    isBlowout: Yup.boolean(),
+    diaperSize: Yup.string(),
+    diaperBrand: Yup.string(),
+    isDiaperRash: Yup.boolean(),
+    rashSigns: Yup.string(),
     note: Yup.string(),
   });
+
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await submitDiaperEntry(values); 
+      alert("Diaper Entry has been submitted!"); 
+      resetForm();
+    } catch (error) {
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   return (
     <div className={styles.formContainerLogs}> 
@@ -53,19 +43,21 @@ const DiaperLogForm = () => {
                 initialValues={{
                     date: "",
                     time: "",
-                    pooped: false,
-                    poopType: "",
-                    blowout: false, 
+                    isPooped: false,
+                    stoolType: "",
+                    stoolAmount: "",
+                    isUrinated: false,
+                    urineType: "",
+                    urineAmount: "",
+                    isBlowout: false, 
                     diaperSize: "",
                     diaperBrand: "",
-                    diaperRash: false,
+                    isDiaperRash: false,
                     rashSigns: "",
                     notes: ""
                 }}
                 validationSchema={DiaperLogSchema}
-                onSubmit={(values) => {
-                    console.log("Form Data Submitted:", values);  
-                }}
+                onSubmit={handleSubmit}
                 >
                 {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, resetForm }) => (
                     
@@ -110,12 +102,12 @@ const DiaperLogForm = () => {
                         <FormControlLabel
                             control={
                             <Checkbox
-                                checked={values.pooped}
+                                checked={values.isPooped}
                                 onChange={(e) => {
                                     handleChange(e);                                        
-                                    setFieldValue("pooped", e.target.checked);
+                                    setFieldValue("isPooped", e.target.checked);
                                 }}
-                                name="pooped"
+                                name="isPooped"
                                 color="primary"
                             />
                             }
@@ -123,7 +115,7 @@ const DiaperLogForm = () => {
                             style={{ marginTop: '20px' }}
                         />
 
-                        {values.pooped && (
+                        {values.isPooped && (
                         <Box sx={{ display: 'flex', gap: 2, marginTop: '20px' }}>
                            <FormControl fullWidth style={{ marginTop: '20px' }}>
                                 <InputLabel>Stool Type</InputLabel>
@@ -171,12 +163,12 @@ const DiaperLogForm = () => {
                         <FormControlLabel
                             control={
                             <Checkbox
-                                checked={values.urinated}
+                                checked={values.isUrinated}
                                 onChange={(e) => {
                                     handleChange(e);                                        
-                                    setFieldValue("urinated", e.target.checked);
+                                    setFieldValue("isUrinated", e.target.checked);
                                 }}
-                                name="urinated"
+                                name="isUrinated"
                                 color="primary"
                             />
                             }
@@ -184,7 +176,7 @@ const DiaperLogForm = () => {
                             style={{ marginTop: '20px' }}
                         />
                         
-                        {values.urinated && (
+                        {values.isUrinated && (
                             <Box sx={{ display: 'flex', gap: 2, marginTop: '20px' }}>
                                 <FormControl fullWidth style={{ marginTop: '20px' }}>
                                     <InputLabel>Urine Type</InputLabel>
@@ -212,9 +204,9 @@ const DiaperLogForm = () => {
                                         onBlur={handleBlur}
                                         name="urineAmount"
                                     >
-                                        <MenuItem value="lightPee">Lightly Soiled</MenuItem>
-                                        <MenuItem value="moderatePee">Moderately Soiled</MenuItem>
-                                        <MenuItem value="heavyPee">Heavily Soiled</MenuItem>
+                                        <MenuItem value="lightUrine">Lightly Soiled</MenuItem>
+                                        <MenuItem value="moderateUrine">Moderately Soiled</MenuItem>
+                                        <MenuItem value="heavyUrine">Heavily Soiled</MenuItem>
                                     </Select>
                                 </FormControl>  
                             </Box>                   
@@ -224,12 +216,12 @@ const DiaperLogForm = () => {
                         <FormControlLabel
                             control={
                             <Checkbox
-                                checked={values.blowout}
+                                checked={values.isBlowout}
                                 onChange={(e) => {
                                     handleChange(e);                                        
-                                    setFieldValue("blowout", e.target.checked);
+                                    setFieldValue("isBlowout", e.target.checked);
                                 }}
-                                name="blowout"
+                                name="isBlowout"
                                 color="primary"
                             />
                             }
@@ -237,7 +229,7 @@ const DiaperLogForm = () => {
                             style={{ marginTop: '20px' }}
                         />
 
-                        {values.blowout && (
+                        {values.isBlowout && (
                             <Box sx={{ display: 'flex', gap: 2, marginTop: '20px' }}>
                                 <TextField
                                     fullWidth
@@ -270,12 +262,12 @@ const DiaperLogForm = () => {
                         <FormControlLabel
                             control={
                             <Checkbox
-                                checked={values.diaperRash}
+                                checked={values.isDiaperRash}
                                 onChange={(e) => {
                                     handleChange(e);                                        
-                                    setFieldValue("diaperRash", e.target.checked);
+                                    setFieldValue("isDiaperRash", e.target.checked);
                                 }}
-                                name="diaperRash"
+                                name="isDiaperRash"
                                 color="primary"
                             />
                             }
@@ -283,7 +275,7 @@ const DiaperLogForm = () => {
                             style={{ marginTop: '20px' }}
                         />
 
-                        {values.diaperRash && (
+                        {values.isDiaperRash && (
                             
                             <TextField
                                 fullWidth

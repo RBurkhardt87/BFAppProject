@@ -1,6 +1,7 @@
 package BFAppProject.dto;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+
 
 public class UserResponseDTO {
 
@@ -9,12 +10,13 @@ public class UserResponseDTO {
     private String lastName;
     private String username;
     private String email;
-    private LocalDateTime dateCreated;
+    private final LocalDate dateCreated;
 
-    public UserResponseDTO() {
+    public UserResponseDTO(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public UserResponseDTO(Long id, String firstName, String lastName, String username, String email, LocalDateTime dateCreated) {
+    public UserResponseDTO(Long id, String firstName, String lastName, String username, String email, LocalDate dateCreated) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -26,6 +28,10 @@ public class UserResponseDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
     public void setId(Long id) {
@@ -64,13 +70,8 @@ public class UserResponseDTO {
         this.email = email;
     }
 
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
-    }
 
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
+
 
 
 }

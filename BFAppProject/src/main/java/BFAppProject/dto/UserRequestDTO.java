@@ -1,10 +1,15 @@
 package BFAppProject.dto;
 
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+import java.time.LocalDate;
+
 public class UserRequestDTO {
+
+    private Long id;
 
     @NotBlank(message = "First name is required")
     @Size(max = 20, message = "First name must be less than 20 characters")
@@ -29,17 +34,29 @@ public class UserRequestDTO {
     @NotBlank(message = "Password verification is required")
     private String verifiedPassword;
 
+    private final LocalDate dateCreated;
 
-    public UserRequestDTO() {}
 
-    public UserRequestDTO(String firstName, String lastName, String username, String email,
-                          String password, String verifiedPassword) {
+    public UserRequestDTO(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public UserRequestDTO(Long id, String firstName, String lastName, String username, String email,
+                          String password, String verifiedPassword, LocalDate dateCreated) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
         this.email = email;
         this.password = password;
         this.verifiedPassword = verifiedPassword;
+        this.dateCreated = dateCreated;
+    }
+
+    public Long getId() { return id; }
+
+    public LocalDate getDateCreated() {
+        return dateCreated;
     }
 
     public String getFirstName() { return firstName; }
