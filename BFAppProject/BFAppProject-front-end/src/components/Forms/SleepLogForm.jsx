@@ -17,21 +17,11 @@ const SleepLogForm = () => {
     sleepType: Yup.string(),
     mood: Yup.string(),
     sleepPosition: Yup.string(),
-    swaddled: Yup.boolean(),
-    swaddleType: Yup.string().when("swaddled", {
-      is: true,
-      then: Yup.string(),
-    }),
-    crying: Yup.boolean(),
-    cryingNotes: Yup.string().when("crying", {
-        is: true,
-        then: Yup.string(),
-    }),
+    swaddled: Yup.boolean(), 
+    crying: Yup.boolean(),   
+    cryingNotes: Yup.string(), 
     sleepAssociations: Yup.boolean(),
-    associationType: Yup.string().when("sleepAssociations", {
-        is: true,
-        then: Yup.string(),
-    })
+    associationType: Yup.string(),
   });
 
  
