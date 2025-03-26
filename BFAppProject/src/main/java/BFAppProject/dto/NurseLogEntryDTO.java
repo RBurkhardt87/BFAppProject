@@ -1,7 +1,6 @@
-package BFAppProject.models;
+package BFAppProject.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
+import jakarta.persistence.PrePersist;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -10,19 +9,11 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
-@Entity
-public class NurseLogEntry {
+public class NurseLogEntryDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate dateCreated;
-
-    @PrePersist
-    protected void onCreate() {
-        this.dateCreated = LocalDate.now();
-    }
+    private final LocalDate dateCreated;
 
     @NotNull(message = "You must pick a date")
     private Date date;
@@ -49,46 +40,32 @@ public class NurseLogEntry {
 
     private String nippleShape;
     private String nippleColoring;
-
-    @JsonProperty("isHardSpot")
     private Boolean isHardSpot;
-
-    @JsonProperty("isBreastRedness")
     private Boolean isBreastRedness;
-
-    @JsonProperty("isBreastSoft")
     private Boolean isBreastSoft;
-
-    @JsonProperty("isBreastPain")
     private Boolean isBreastPain;
     private String maternalNotes;
-
-    @JsonProperty("isClickingPresent")
     private Boolean isClickingPresent;
-
-    @JsonProperty("isInfantSputtering")
     private Boolean isInfantSputtering;
-
-    @JsonProperty("isActiveFeeding")
     private Boolean isActiveFeeding;
-
-    @JsonProperty("isInfantSleepy")
     private Boolean isInfantSleepy;
-
     private List<String> infantFeedingCues;
     private String infantNotes;
     private String sessionNotes;
 
-    public NurseLogEntry() {
+
+    public NurseLogEntryDTO(LocalDate dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
-    public NurseLogEntry(Date date, Boolean leftSide, String leftStartTime, String leftStopTime, Boolean rightSide,
+
+    public NurseLogEntryDTO(Long id, Date date, LocalDate dateCreated, Boolean leftSide, String leftStartTime, String leftStopTime, Boolean rightSide,
                          String rightStartTime, String rightStopTime, List<String> leftSidePositions, List<String>
                                  rightSidePositions, String nippleShape, String nippleColoring, Boolean isHardSpot,
                          Boolean isBreastRedness, Boolean isBreastSoft, Boolean isBreastPain, String maternalNotes,
                          Boolean isClickingPresent, Boolean isInfantSputtering, Boolean isActiveFeeding, Boolean isInfantSleepy,
                          List<String> infantFeedingCues, String infantNotes, String sessionNotes) {
-        this.dateCreated = LocalDate.now();
+        this.dateCreated = dateCreated;
         this.date = date;
         this.leftSide = leftSide;
         this.leftStartTime = leftStartTime;
@@ -113,6 +90,8 @@ public class NurseLogEntry {
         this.infantNotes = infantNotes;
         this.sessionNotes = sessionNotes;
     }
+
+
 
     public Long getId() {
         return id;
@@ -238,7 +217,7 @@ public class NurseLogEntry {
         return isBreastPain;
     }
 
-    public void setBreastPain(Boolean breastPain) {
+    public void setIsBreastPain(Boolean breastPain) {
         isBreastPain = breastPain;
     }
 

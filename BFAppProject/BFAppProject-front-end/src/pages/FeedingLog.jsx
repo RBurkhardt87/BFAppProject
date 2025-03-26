@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Button, Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
-import FeedingLogForm from '../components/Forms/FeedingLogForm';
+import NursingLogForm from '../components/Forms/NursingLogForm';
 
 const FeedingLog = () => {
 
@@ -50,7 +50,7 @@ const FeedingLog = () => {
         </DialogTitle>
 
         <DialogContent>
-          <FeedingLogForm />
+          <NursingLogForm />
         </DialogContent>
       </Dialog>
     </div>

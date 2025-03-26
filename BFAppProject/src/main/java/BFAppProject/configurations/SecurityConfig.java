@@ -36,7 +36,7 @@ public class SecurityConfig implements WebMvcConfigurer {
                                         "/api/users/**",
                                         "/api/sleep-log/**",
                                         "api/diaper-log/**",
-                                        "api/nursing-log/**"
+                                        "api/nurse-log/**"
                                 ).permitAll()
                                 .anyRequest().authenticated()
                 );

@@ -1,52 +1,49 @@
 import React from 'react';
 import { Box, Button, FormControl, InputLabel, MenuItem, Select, Checkbox, FormControlLabel, Paper, Card } from '@mui/material';
-import TextField from '../Forms/TextField';
+import TextField from './TextField';
 import styles from '../../styling/FormStyling.module.css';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
 import { FieldArray } from "formik";
+import { submitNursingEntry } from "../../services/NursingLogService";
 
-const FeedingLogForm = () => {
+const NursingLogForm = () => {
 
-  const FeedingLogSchema = Yup.object().shape({
-    date: Yup.date().required("Required"),
-    leftSide: Yup.boolean(),
-    leftStartTime: Yup.string().when("leftSide", {
-        is: true,
-        then: Yup.string().required("Required"),
-    }),
-    leftStopTime: Yup.string().when("leftSide", {
-        is: true,
-        then: Yup.string().required("required")
-    }),
-    rightSide: Yup.boolean(),
-    rightStartTime: Yup.string().when("rightSide", {
-        is: true,
-        then: Yup.string().required("Required"),
-    }),
-    rightStopTime: Yup.string().when("rightSide", {
-        is: true,
-        then: Yup.string().required("required")
-    }),
-    leftSidePosition: Yup.array().of(Yup.string()).min(1, "Select at least one position"), 
-    rightSidePosition: Yup.array().of(Yup.string()).min(1, "Select at least one position"),
-    nippleShape: Yup.string(),
-    nippleColoring: Yup.string(),
-    isHardSpots: Yup.boolean(),
-    isBreastRedness: Yup.boolean(),
-    isBreastSoft: Yup.boolean(),
-    isBreastPain: Yup.boolean(),
-    maternalNotes: Yup.string(),
-    isClickingPresent: Yup.boolean(),
-    isInfantSputtering: Yup.boolean(),
-    isActiveFeeding: Yup.boolean(),
-    isInfantSleepy: Yup.boolean(),
-    infantFeedingCues: Yup.array().of(Yup.string()),   //I don't want it to be required 
-    infantNotes: Yup.string(), 
-    sessionNotes: Yup.string(),
-
+    const FeedingLogSchema = Yup.object().shape({
+        date: Yup.date().required("Required"),
+        leftSide: Yup.boolean(),
+        leftStartTime: Yup.string(),
+        leftStopTime: Yup.string(),
+        rightSide: Yup.boolean(),
+        rightStartTime: Yup.string(),
+        rightStopTime: Yup.string(),
+        leftSidePosition: Yup.array().of(Yup.string()).min(1, "Select at least one position"), 
+        rightSidePosition: Yup.array().of(Yup.string()).min(1, "Select at least one position"),
+        nippleShape: Yup.string(),
+        nippleColoring: Yup.string(),
+        isHardSpots: Yup.boolean(),
+        isBreastRedness: Yup.boolean(),
+        isBreastSoft: Yup.boolean(),
+        isBreastPain: Yup.boolean(),
+        maternalNotes: Yup.string(),
+        isClickingPresent: Yup.boolean(),
+        isInfantSputtering: Yup.boolean(),
+        isActiveFeeding: Yup.boolean(),
+        isInfantSleepy: Yup.boolean(),
+        infantFeedingCues: Yup.array().of(Yup.string()),   
+        infantNotes: Yup.string(), 
+        sessionNotes: Yup.string()
     });
 
+    const handleSubmit = async (values, { resetForm }) => {
+        try {
+          await submitNursingEntry(values); 
+          alert("Nursing Entry has been submitted!"); 
+          resetForm();
+        } catch (error) {
+          alert("Something went wrong. Please try again.");
+        }
+      };
 
 
   return (
@@ -81,9 +78,7 @@ const FeedingLogForm = () => {
 
                 }}
                 validationSchema={FeedingLogSchema}
-                onSubmit={(values) => {
-                    console.log("Form Data Submitted:", values);  
-                }}
+                onSubmit={ handleSubmit }
                 >
                 {({ values, handleChange, handleBlur, handleSubmit, errors, touched, setFieldValue, resetForm }) => (
                     
@@ -165,7 +160,7 @@ const FeedingLogForm = () => {
 
                             <div className={styles.checkboxGroup}>All Nursing Positions on the Left Side</div>
                             <FieldArray
-                            name="leftSidePosition"
+                            name="leftSidePositions"
                             render={(arrayHelpers) => (
                                 <Box sx={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 2, marginTop: 2 }}>
                                 {["Cradle", "Cross-Cradle", "Football", "Laid-Back", "Side-Lying", "Upright/Sitting", "Other"].map((pos) => (
@@ -188,8 +183,8 @@ const FeedingLogForm = () => {
                                 </Box>
                             )}
                             />
-                            {touched.leftSidePositions && errors.leftSidePositions && (
-                            <div style={{ color: "red" }}>{errors.leftSidePositions}</div>
+                            {touched.rightSidePositions && errors.rightSidePositions&& (
+                            <div style={{ color: "red" }}>{errors.rightSidePositions}</div>
                             )}
                         </Box>
                         )}
@@ -324,7 +319,7 @@ const FeedingLogForm = () => {
                                 <InputLabel>Nipple Coloring (after feed)</InputLabel>
                                 <Select
                                     label="Nipple Coloring"
-                                    value={values.stoolAmount}
+                                    value={values.nippleColoring}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     name="nippleColoring"
@@ -563,4 +558,4 @@ const FeedingLogForm = () => {
   );
 };
 
-export default FeedingLogForm;
+export default NursingLogForm;
