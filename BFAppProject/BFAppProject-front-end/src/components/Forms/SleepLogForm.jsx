@@ -4,7 +4,7 @@ import TextField from '../Forms/TextField';
 import styles from '../../styling/FormStyling.module.css';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
-import axios from 'axios';
+import { submitSleepEntry } from '../../services/SleepLogService';
 
 const SleepLogForm = () => {
 
@@ -34,17 +34,16 @@ const SleepLogForm = () => {
     })
   });
 
+ 
   const handleSubmit = async (values, { resetForm }) => {
     try {
-        const response = await axios.post("http://localhost:8080/api/sleep-log/create", values);
-        console.log("Form successfully submitted:", response.data);
-        alert("Sleep log saved!");
-        resetForm();
+      await submitSleepEntry(values); 
+      alert("Sleep Entry has been submitted!"); 
+      resetForm();
     } catch (error) {
-        console.error("Error submitting form:", error);
-        alert("Something went wrong. Please try again.");
+      alert("Something went wrong. Please try again.");
     }
-};
+  };
 
   return (
     <div className={styles.formContainerLogs}> 
@@ -65,7 +64,8 @@ const SleepLogForm = () => {
                     crying: false,
                     cryingNotes: "",
                     sleepAssociations: false,
-                    associationType: ""
+                    associationType: "", 
+                    sleepEnvironment: ""
                 }}
                 validationSchema={SleepLogSchema}
                 onSubmit={handleSubmit}

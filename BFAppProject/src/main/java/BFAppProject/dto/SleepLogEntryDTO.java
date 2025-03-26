@@ -1,20 +1,13 @@
-package BFAppProject.models;
+package BFAppProject.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
 import java.util.Date;
 
-@Entity
-public class SleepLogEntry {
+public class SleepLogEntryDTO {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull(message = "Must enter a date")
@@ -39,12 +32,14 @@ public class SleepLogEntry {
     private Boolean sleepAssociations;
     private String associationType;
 
-    public SleepLogEntry() {
+
+    public SleepLogEntryDTO() {
     }
 
-    public SleepLogEntry(Date date, String startTime, String stopTime, String sleepLocation, String sleepQuality,
-                         String sleepType, String mood, String sleepPosition, Boolean swaddled, String swaddleType,
-                         Boolean crying, String cryingNotes, Boolean sleepAssociations, String associationType) {
+    public SleepLogEntryDTO(Date date, String startTime, String stopTime, String sleepLocation,
+                            String sleepQuality, String sleepType, String mood, String sleepPosition, Boolean swaddled,
+                            String swaddleType, Boolean crying, String cryingNotes, Boolean sleepAssociations, String associationType) {
+
         this.date = date;
         this.startTime = startTime;
         this.stopTime = stopTime;
@@ -60,8 +55,6 @@ public class SleepLogEntry {
         this.sleepAssociations = sleepAssociations;
         this.associationType = associationType;
     }
-
-
 
     public Long getId() {
         return id;
@@ -178,6 +171,5 @@ public class SleepLogEntry {
     public void setAssociationType(String associationType) {
         this.associationType = associationType;
     }
-
 
 }
