@@ -12,16 +12,32 @@ const NursingLogForm = () => {
     const FeedingLogSchema = Yup.object().shape({
         date: Yup.date().required("Required"),
         leftSide: Yup.boolean(),
-        leftStartTime: Yup.string(),
-        leftStopTime: Yup.string(),
         rightSide: Yup.boolean(),
-        rightStartTime: Yup.string(),
-        rightStopTime: Yup.string(),
-        leftSidePosition: Yup.array().of(Yup.string()).min(1, "Select at least one position"), 
-        rightSidePosition: Yup.array().of(Yup.string()).min(1, "Select at least one position"),
+        leftStartTime: Yup.string().when("leftSide", {
+            is: true,
+            then: (schema) => schema.required("Start time required when left side is selected"),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        leftStopTime: Yup.string().when("leftSide", {
+            is: true,
+            then: (schema) => schema.required("Stop time required when left side is selected"),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        rightStartTime: Yup.string().when("rightSide", {
+            is: true,
+            then: (schema) => schema.required("Start time required when right side is selected"),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        rightStopTime: Yup.string().when("rightSide", {
+            is: true,
+            then: (schema) => schema.required("Stop time required when right side is selected"),
+            otherwise: (schema) => schema.notRequired(),
+        }),
+        leftSidePosition: Yup.array().of(Yup.string()).nullable(),
+        rightSidePosition: Yup.array().of(Yup.string()).nullable(),
         nippleShape: Yup.string(),
         nippleColoring: Yup.string(),
-        isHardSpots: Yup.boolean(),
+        isHardSpot: Yup.boolean(),
         isBreastRedness: Yup.boolean(),
         isBreastSoft: Yup.boolean(),
         isBreastPain: Yup.boolean(),
@@ -41,7 +57,7 @@ const NursingLogForm = () => {
           alert("Nursing Entry has been submitted!"); 
           resetForm();
         } catch (error) {
-          alert("Something went wrong. Please try again.");
+          alert("Something went wrong. Please try again:", error);
         }
       };
 
@@ -63,7 +79,7 @@ const NursingLogForm = () => {
                     rightSidePositions: [],
                     nippleShape: "",
                     nippleColoring: "",
-                    isHardSpots: false,
+                    isHardSpot: false,
                     isBreastRedness: false, 
                     isBreastSoft: false,
                     isBreastPain: false,
@@ -132,7 +148,6 @@ const NursingLogForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="leftStartTime"
-                                required
                                 error={touched.leftStartTime && Boolean(errors.leftStartTime)}
                                 helperText={touched.leftStartTime && errors.leftStartTime}
                                 InputLabelProps={{
@@ -148,7 +163,6 @@ const NursingLogForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="leftStopTime"
-                                required
                                 error={touched.leftStopTime && Boolean(errors.leftStopTime)}
                                 helperText={touched.leftStopTime && errors.leftStopTime}
                                 InputLabelProps={{
@@ -220,7 +234,6 @@ const NursingLogForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="rightStartTime"
-                                required
                                 error={touched.rightStartTime && Boolean(errors.rightStartTime)}
                                 helperText={touched.rightStartTime && errors.rightStartTime}
                                 InputLabelProps={{
@@ -236,7 +249,6 @@ const NursingLogForm = () => {
                                 onChange={handleChange}
                                 onBlur={handleBlur}
                                 name="rightStopTime"
-                                required
                                 error={touched.rightStopTime && Boolean(errors.rightStopTime)}
                                 helperText={touched.rightStopTime && errors.rightStopTime}
                                 InputLabelProps={{
@@ -336,12 +348,12 @@ const NursingLogForm = () => {
                             <FormControlLabel
                                 control={
                                 <Checkbox
-                                    checked={values.isHardSpots}
+                                    checked={values.isHardSpot}
                                     onChange={(e) => {
                                         handleChange(e);                                        
-                                        setFieldValue("isHardSpots", e.target.checked);
+                                        setFieldValue("isHardSpot", e.target.checked);
                                     }}
-                                    name="isHardSpots"
+                                    name="isHardSpot"
                                     color="primary"
                                 />
                                 }
