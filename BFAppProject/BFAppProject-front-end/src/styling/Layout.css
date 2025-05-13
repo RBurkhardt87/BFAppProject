@@ -89,3 +89,22 @@ header {
     box-sizing: border-box;
 }
 
+.home-page-container {
+    display: flex;
+    align-items: center;
+    gap: 20px; 
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.home-page-image {
+    height: 300px;
+    width: 300px;
+    align-items: right;
+    /* border: 2px solid teal; */
+}
+
+.home-page-text {
+    flex: 1;
+    min-width: 250px;
+}

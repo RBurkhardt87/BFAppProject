@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,6 +83,7 @@ public class NurseLogEntry {
     public NurseLogEntry() {
     }
 
+
     public NurseLogEntry(Date date, Boolean leftSide, String leftStartTime, String leftStopTime, Boolean rightSide,
                          String rightStartTime, String rightStopTime, List<String> leftSidePositions, List<String>
                                  rightSidePositions, String nippleShape, String nippleColoring, Boolean isHardSpot,
@@ -90,14 +92,16 @@ public class NurseLogEntry {
                          List<String> infantFeedingCues, String infantNotes, String sessionNotes) {
         this.dateCreated = LocalDate.now();
         this.date = date;
-        this.leftSide = leftSide;
-        this.leftStartTime = leftStartTime;
-        this.leftStopTime = leftStopTime;
-        this.rightSide = rightSide;
-        this.rightStartTime = rightStartTime;
-        this.rightStopTime = rightStopTime;
-        this.leftSidePositions = leftSidePositions;
-        this.rightSidePositions = rightSidePositions;
+        this.leftSide = leftSide != null ? leftSide : false;
+        this.leftStartTime = leftStartTime != null ? leftStartTime : null;
+        this.leftStopTime = leftStopTime != null ? leftStopTime : null;
+
+        this.rightSide = rightSide != null ? rightSide : false;
+        this.rightStartTime = rightStartTime != null ? rightStartTime : null;
+        this.rightStopTime = rightStopTime != null ? rightStopTime : null;
+
+        this.leftSidePositions = leftSidePositions != null ? leftSidePositions : new ArrayList<>();
+        this.rightSidePositions = rightSidePositions != null ? rightSidePositions : new ArrayList<>();
         this.nippleShape = nippleShape;
         this.nippleColoring = nippleColoring;
         this.isHardSpot = isHardSpot;
@@ -113,6 +117,8 @@ public class NurseLogEntry {
         this.infantNotes = infantNotes;
         this.sessionNotes = sessionNotes;
     }
+
+
 
     public Long getId() {
         return id;

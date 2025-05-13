@@ -8,7 +8,7 @@ const Header = ({ pageName }) => {
 
   return (
     <div className="page-header">
-      <h1>Welcome to the {pageName} Page</h1>
+      <h1>Welcome to {pageName}</h1>
     </div>
   )
 }

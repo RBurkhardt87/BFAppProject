@@ -24,18 +24,18 @@ function MainLayout() {
 
   const pageTitles = {
     "/": "Home",
-    "/home": "Home",
+    "/home": "Begonia Baby Breastfeeding Application",
     "/about": "About",
     "/contact": "Contact",
-    "/login": "Login",
-    "/register": "Registration",
-    "/sleep-log": "Sleep Log",
-    "/diaper-log": "Diaper Log",
-    "/nursing-log": "Nursing Log",
-    "/pumping-log": "Pumping Log",
-    "/bottle-feeding-log": "Bottle Feeding Log",
-    "/nutrition": "Nutrition",
-    "/resources": "Resources",
+    "/login": "the Login Page",
+    "/register": "the Registration Page",
+    "/sleep-log": "Your Sleep Log",
+    "/diaper-log": "Your Diaper Log",
+    "/nursing-log": "Your Nursing Log",
+    "/pumping-log": "Your Pumping Log",
+    "/bottle-feeding-log": "Your Bottle Feeding Log",
+    "/nutrition": "our Nutrition Page",
+    "/resources": "our Resource Page",
   };
 
   const currentPage = pageTitles[location.pathname] || "Page";
@@ -44,7 +44,7 @@ function MainLayout() {
     <div className="main-background">
     <div className="layout-container"> 
       <header>
-        <h1>Breastfeeding Application</h1>
+        <h1>Begonia Baby Breastfeeding</h1>
       </header>
 
       <Navbar />
